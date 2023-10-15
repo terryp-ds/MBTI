@@ -6,6 +6,7 @@ TBA
 
 ## Folder Structure
 ```
+.
 ├── data
 │   ├── data.csv
 │   └── raw_data
