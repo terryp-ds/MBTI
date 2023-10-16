@@ -17,9 +17,10 @@ TBA
 ├── README.md
 ├── requirements.txt
 └── utils
-    ├── erase_sentence
-    ├── erase_word
-    ├── exclude
+    ├── add_dictionary.csv
+    ├── erase_sentence.csv
+    ├── erase_word.csv
+    ├── exclude.csv
     ├── login.json
     ├── preprocess.py
     └── scrapper.py
