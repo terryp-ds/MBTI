@@ -87,6 +87,22 @@ def group_by_user(filename=OUTPUT_FILE_NAME):
         data[['nickname','MBTI']].drop_duplicates('nickname'), on='nickname').to_csv(filename, index=False)
 
 
+# 작성자 닉네임 마스킹
+def mask_nickname(filename=OUTPUT_FILE_NAME):
+    data = pd.read_csv(filename)
+    nicknames = data['nickname'].unique()
+    mask = {name:0 for name in nicknames}
+    count = {p:0 for p in personalities}
+    
+    for _,row in data.iterrows():
+        name, mbti = row[['nickname', 'MBTI']]
+        mask[name] = mbti + '_' + str(count[mbti]).zfill(4)
+        count[mbti] += 1
+
+    data['nickname'] = data['nickname'].copy().map(mask)
+    data.to_csv(filename, index=False)
+
+
 # MBTI 리스트
 personalities = [
     'ISFJ','ISFP','ISTJ','ISTP',
@@ -114,3 +130,4 @@ if __name__ == '__main__':
     get_mbti_data()
     cleanse()
     group_by_user()
+    mask_nickname()
