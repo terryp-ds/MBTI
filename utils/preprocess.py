@@ -81,7 +81,7 @@ def group_by_user(filename=OUTPUT_FILE_NAME):
 
     for _,row in data.iterrows():
         name, string = row[['nickname','contents']]
-        contents[name] += string + ' '
+        contents[name] += str(string) + ' '
 
     pd.DataFrame(contents.items(), columns=['nickname', 'contents']).merge(
         data[['nickname','MBTI']].drop_duplicates('nickname'), on='nickname').to_csv(filename, index=False)
